@@ -14,7 +14,7 @@
       <el-col class="line" :span="1">&nbsp;</el-col>
     </el-form-item>
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:48%;" @click.native.prevent="regist">注 册</el-button>
+      <el-button type="primary" style="width:48%;" @click.native.prevent="regist">重 置</el-button>
       <el-button type="primary" style="width:48%;" @click.native.prevent="login" :loading="loading">登 录</el-button>
     </el-form-item>
   </el-form>
@@ -45,11 +45,10 @@ export default {
   },
   methods: {
     login () {
-      this.loading = true
       axios.post('/users/login', {loginForm: this.loginForm}).then((response) => {
         let res = response.data
         // console.log('res' + res.result.name)
-        if (res.status === '0') {
+        if (res.code === '200') {
           this.errorTip = false
           alert('"登录成功"' + res.result.name)
           this.$router.push('/home')
@@ -65,7 +64,8 @@ export default {
         // console.log('res' + res.result.name)
         if (res.status === '0') {
           this.errorTip = false
-          alert('"登录成功"' + res.result.name)
+          alert('"注册成功"' + res.result.name)
+          this.login()
           this.$router.push('/home')
         } else {
           this.errorTip = true

@@ -1,17 +1,9 @@
-const mysql = require('mysql');     //引入mysql模块
-exports.base = (sql,data,callback) => {
-    const connection = mysql.createConnection({      //创建mysql实例
-        host:'http://localhost',
-        prot:'3306',
-        user:'root',
-        password:'root',
-        database:'kittty'
-    });
-    connection.connect();
-    connection.query(sql, data, function (error,results, fields) {
-        if(error) throw error;
-        callback(results);
-        console.log("数据库连接成功")
-    });
-    connection.end();
+module.exports = {
+    mysql: {
+        host: 'localhost',     //mysql地址127.0.0.1
+        user: 'root',     //连接mysql的用户名和密码
+        password: 'root',
+        database: 'kittty',   //数据库名
+        port: '3306',   //mysql端口号
+    }
 }
