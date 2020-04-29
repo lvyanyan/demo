@@ -68,6 +68,10 @@ module.exports = {
         }
       },
       {
+        test:/\.scss$/,
+        loaders:['css','scss','style']
+      },
+      {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {

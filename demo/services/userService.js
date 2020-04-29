@@ -53,22 +53,55 @@ exports.login = function (req, res) {   //login是接口地址，你可以随意
 exports.regist = function (req, res) {   //login是接口地址，你可以随意写
     //此获取参数的方法是get方法，post要先安装body-parser，有需要的可以联系我
     var user_name = req.body.loginForm.username;       // 获取从接口传递的参数，用户名
-    var password = req.body.loginForm.password;    // 获取从接口传递的参数，密码
+    var password = req.body.loginForm.password;     // 获取从接口传递的参数，密码
+    var obj;
     //写sql查询语句，login是表名，查看是否有此用户
-    var sqls = sql
+    var seName = sql
+                    .table('sysUser')
+                    .where({userName:user_name})
+                    .select()
+    conn.query(seName, function (err,result) {
+        if(err) {
+            res.send(err.message)
+            return
+        }
+        if( result != []) {
+            obj = {
+                status:0,
+                code:200,
+                message:"用户名已被注册",
+            }
+            res.send(obj)
+            return
+        }else{
+    var sqlc = sql
                 .table('sysUser')
-                .data({id:'0009',userName:user_name,userPwd:password})
-                .insert()
+                .field('MAX(id)')
+                .select()
     var sqlParams = [user_name]; 
     //新增
-    console.log(sqls)
-    conn.query(sqls, sqlParams, function (err, result) {
+    conn.query(sqlc, function (err, result) {
         if (err) {
             res.send(err.message);
             return;
         }        
             // 如果查询出来的数据密码和传过来的密码一致，登录成功
-            
-        res.send(sqls);   //把数据返回
+        var id =null;
+        id = result[0]['MAX(id)']+1;
+        var sqls = sql
+                .table('sysUser')
+                .data({id:id,userName:user_name,userPwd:password})
+                .insert()
+        conn.query(sqls,function(err,result){
+            if (err) {
+                res.send(err.message);
+                return;
+            }
+            res.send(result);   //把数据返回 
+        })  
+        
     });
+        }
+    })
+    
 }

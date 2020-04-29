@@ -22,9 +22,8 @@
 <script type="text/ecmascript-6">
 import axios from 'axios'
 export default {
-  name: 'Login',
-  data () {
-    return {
+  name: 'Login',    
+  data () {return{
       themeColor: '#14889A',
       loading: false,
       errorTip: false,
@@ -81,7 +80,7 @@ export default {
 
 }
 </script>
-<style  scoped>
+<style lang="scss" scoped>
   .login-container {
     -webkit-border-radius: 5px;
     border-radius: 5px;
