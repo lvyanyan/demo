@@ -7,16 +7,18 @@
        <img src="@/assets/search.png" alt="" @click="openSearch" width="100%" height="100%">
       </div>
     </div>
+    <note-list></note-list>
   </div>
 </template>
 
 <script>
 import Search from '@/components/search'
 import Plus from '@/components/plus'
+import noteList from '@/components/noteList'
 export default {
   name: 'homeHeader',
   components:{
-    Search,Plus
+    Search,Plus,noteList
   },
   data () {
     return {

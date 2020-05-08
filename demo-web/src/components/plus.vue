@@ -22,7 +22,7 @@ export default {
             boxList:[
                 {
                     name:"添加好友",
-                    path:'/addfriend',
+                    path:'/home/addFriend',
                     component:AddFriend
                 },
                 {
@@ -49,9 +49,18 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     span{
         font-size:26px;
         line-height: 26px;
+    }
+    div.plus-box{
+        width:120px;
+        height: 25px;
+        background-color: #003300;
+        line-height: 25px;
+        margin-left: -100px;
+        color:#fff;
+        border-bottom:1px solid #333333;
     }
 </style>
